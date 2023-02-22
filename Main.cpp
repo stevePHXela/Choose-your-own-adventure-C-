@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <string>
 #include <windows.h>
-#include <string>
 #include <array>
 
 using std::cout;
@@ -10,7 +9,7 @@ using std::cin;
 using std::endl;
 using std::string;
 
-int level = 0;
+int level;
 string message = "Enter (S) to start or enter (Q) to exit?: ";
 string situation;
 std::array<string, 2> Options;
@@ -20,6 +19,7 @@ bool gameOver = false;
 struct Keys
 {
 	static const char QUIT = 'q';
+	static const char START = 's';
 	static const char CHOICE_A = 'a';
 	static const char CHOICE_B = 'b';
 };
@@ -48,10 +48,15 @@ char getUserInput()
 {
 	char userInput;
 	cin >> userInput;
+	userInput = (char)std::tolower(userInput);
 
 	if (userInput == Keys::QUIT)
 	{
 		exit(EXIT_SUCCESS);
+	}
+	else if (userInput == Keys::START && level == NULL)
+	{
+		level = 0;
 	}
 
 	return userInput;
@@ -59,7 +64,7 @@ char getUserInput()
 
 void Logic()
 {
-	char userChoice = std::tolower(getUserInput());
+	char userChoice = getUserInput();
 
 	if (level == 0)
 	{
@@ -166,6 +171,10 @@ void Run()
 	{
 		Draw();
 		Logic();
+
+		cout << ">>>>>>>>>>>>>>>>>>>>>" << endl;
+		cout << "\"" << message << "\"" << endl;
+		cout << ">>>>>>>>>>>>>>>>>>>>>" << endl;
 	}
 }
 
