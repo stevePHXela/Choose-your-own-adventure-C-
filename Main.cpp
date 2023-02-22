@@ -13,7 +13,7 @@ int level;
 string message = "Enter (S) to start or enter (Q) to exit?: ";
 string situation;
 std::array<string, 2> Options;
-bool gameOver = false;
+bool gameOver = false;	
 
 struct Keys
 {
