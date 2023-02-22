@@ -13,7 +13,6 @@ int level;
 string message = "Enter (S) to start or enter (Q) to exit?: ";
 string situation;
 std::array<string, 2> Options;
-
 bool gameOver = false;
 
 struct Keys
@@ -56,7 +55,7 @@ char getUserInput()
 	}
 	else if (userInput == Keys::START && level == NULL)
 	{
-		level = 0;
+		level = 1;
 	}
 
 	return userInput;
@@ -66,7 +65,7 @@ void Logic()
 {
 	char userChoice = getUserInput();
 
-	if (level == 0)
+	if (level == 1)
 	{
 		message = "Enter a choices or enter (Q) to exit?: ";
 		situation = "They are here. their vision is based on movement, they give chase.";
@@ -75,7 +74,7 @@ void Logic()
 		level++;
 	}
 
-	if (level == 1 && userChoice != 's')
+	if (level == 2)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -90,7 +89,7 @@ void Logic()
 			Options[1] = "B. Hide!";
 		}
 	}
-	else if (level == 2)
+	else if (level == 3)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -105,7 +104,7 @@ void Logic()
 			Options[1] = "B. Stay hidden!";
 		}
 	}
-	else if (level == 3)
+	else if (level == 4)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -120,7 +119,7 @@ void Logic()
 			Options[1] = "B. Look around!";
 		}
 	}
-	else if (level == 4)
+	else if (level == 5)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -135,7 +134,7 @@ void Logic()
 			gameOver = true;
 		}
 	}
-	else if (level == 5)
+	else if (level == 6)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -150,7 +149,7 @@ void Logic()
 			gameOver = true;
 		}
 	}
-	else if (level == 6)
+	else if (level == 7)
 	{
 		if (userChoice == Keys::CHOICE_A)
 		{
@@ -167,8 +166,11 @@ void Logic()
 
 void Run()
 {
-	while (!gameOver)
+	while (true)
 	{
+		if (gameOver)
+			exit(EXIT_SUCCESS);
+
 		Draw();
 		Logic();
 
